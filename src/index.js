@@ -1,22 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-//prevent default refresh when clicking submit
 
+//grab text input
+const form = document.querySelector("#create-task-form");
 const input = document.querySelector('#new-task-description');
 
-document.querySelector('#create-task-form').addEventListener('submit', function(e) {
- e.preventDefault();
- console.log(input.value)
+//submit form
+form.addEventListener('submit', function(e) {
+ e.preventDefault(); //prevent default refresh when clicking submit
+ addToDo(input.value) //call function to add list item using input text input
+ form.reset(); //reset form after adding li
 });
 
-})
-
-/*
+//add items
 function addToDo(newTask) {
-  let li = document.createElement('li')
-  li.textContent = newTask
-  document.querySelector('#tasks').appendChild(li)
+  let li = document.createElement('li'); //create li
+  li.textContent = `${newTask} `; //set li text
+
+  let btn = document.createElement('button'); //create button 
+  btn.textContent = 'x' //set button text
+
+  li.appendChild(btn); //append button to li
+  document.querySelector('#tasks').appendChild(li) //append li to ul using id
+
+  btn.addEventListener('click', (e) => e.target.parentNode.remove()); //delete button and li
+
 }
+
 
 });
 
